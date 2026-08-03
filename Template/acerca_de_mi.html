@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acerca de mí</title>
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial, Helvetica, sans-serif;
+        }
+
+        body{
+            background:linear-gradient(135deg,#0f172a,#1e3a8a);
+            color:white;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            min-height:100vh;
+            padding:20px;
+        }
+
+        .contenido{
+            max-width:700px;
+            text-align:center;
+        }
+
+        h1{
+            font-size:50px;
+            margin-bottom:25px;
+        }
+
+        h2{
+            color:#93c5fd;
+            margin-bottom:20px;
+        }
+
+        p{
+            font-size:20px;
+            line-height:1.8;
+            color:#d1d5db;
+            margin-bottom:20px;
+        }
+
+        .botones{
+            margin-top:35px;
+            display:flex;
+            justify-content:center;
+            gap:20px;
+        }
+
+        .botones a{
+            text-decoration:none;
+            background:#2563eb;
+            color:white;
+            padding:14px 30px;
+            border-radius:10px;
+            font-weight:bold;
+            transition:.3s;
+        }
+
+        .botones a:hover{
+            background:#1d4ed8;
+            transform:translateY(-3px);
+        }
+    </style>
+
+</head>
+<body>
+
+<div class="contenido">
+
+    <h1>👨‍💻 Acerca de mí</h1>
+
+    <h2>Juan Ignacio Farah</h2>
+
+    <p>
+        Soy estudiante de programación y actualmente estoy desarrollando
+        este proyecto de e-commerce con Django como parte de la materia
+        Desarrollo de Aplicaciones.
+    </p>
+
+    <p>
+        Mi objetivo es aprender desarrollo web utilizando el patrón MTV,
+        bases de datos y buenas prácticas para crear aplicaciones completas.
+    </p>
+
+    <div class="botones">
+        <a href="/">🏠 Inicio</a>
+        <a href="/productos/">🛒 Productos</a>
+    </div>
+
+</div>
+
+</body>
+</html>
