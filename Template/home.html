@@ -1,486 +1,99 @@
-<!DOCTYPE html>
-<html lang="es">
+{% extends "base.html" %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% block titulo %}
+Inicio
+{% endblock %}
 
-    <title>Tienda Libre</title>
+{% block contenido %}
 
-    <style>
+<section class="hero">
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, Helvetica, sans-serif;
-        }
+    <div class="container text-center">
 
-        body {
-            background: #f7f5f0;
-            color: #1c1c1c;
-        }
+        <span class="badge bg-warning text-dark mb-3 fs-6">
+            Proyecto Django
+        </span>
 
+        <h1 class="display-3 fw-bold">
+            Bienvenido a Tienda Libre
+        </h1>
 
-        nav {
-            height: 75px;
-            background: #151515;
-
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-
-            padding: 0 8%;
-        }
-
-        .logo {
-            color: white;
-            font-size: 25px;
-            font-weight: bold;
-            letter-spacing: -1px;
-        }
-
-        .logo span {
-            color: #ff7a00;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 30px;
-        }
-
-        .nav-links a {
-            color: #dddddd;
-            text-decoration: none;
-            font-size: 15px;
-
-            transition: 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: #ff7a00;
-        }
-
-
-        /* ---------------- HERO ---------------- */
-
-        .hero {
-            min-height: 550px;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            text-align: center;
-
-            padding: 80px 20px;
-
-            background:
-                radial-gradient(
-                    circle at top right,
-                    #ffe1c2,
-                    transparent 40%
-                ),
-                #f7f5f0;
-        }
-
-        .hero-content {
-            max-width: 850px;
-        }
-
-        .tag {
-            display: inline-block;
-
-            background: #fff0df;
-            color: #d85f00;
-
-            padding: 8px 16px;
-
-            border-radius: 50px;
-
-            font-size: 14px;
-            font-weight: bold;
-
-            margin-bottom: 25px;
-        }
-
-        .hero h1 {
-            font-size: clamp(45px, 7vw, 75px);
-
-            line-height: 1;
-
-            margin-bottom: 25px;
-
-            letter-spacing: -3px;
-        }
-
-        .hero h1 span {
-            color: #ff7a00;
-        }
-
-        .hero p {
-            max-width: 600px;
-
-            margin: auto;
-
-            font-size: 19px;
-            line-height: 1.7;
-
-            color: #666;
-        }
-
-        .hero-buttons {
-            margin-top: 35px;
-
-            display: flex;
-            justify-content: center;
-
-            gap: 15px;
-
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            text-decoration: none;
-
-            padding: 15px 30px;
-
-            border-radius: 10px;
-
-            font-weight: bold;
-
-            transition: 0.3s;
-        }
-
-        .btn-primary {
-            background: #ff7a00;
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background: #e56800;
-            transform: translateY(-3px);
-
-            box-shadow: 0 10px 25px rgba(255, 122, 0, 0.25);
-        }
-
-        .btn-secondary {
-            border: 1px solid #ddd;
-            color: #222;
-            background: white;
-        }
-
-        .btn-secondary:hover {
-            border-color: #ff7a00;
-            color: #ff7a00;
-
-            transform: translateY(-3px);
-        }
-
-
-
-        .features {
-            max-width: 1100px;
-
-            margin: 0 auto;
-
-            padding: 80px 20px;
-
-            display: grid;
-
-            grid-template-columns: repeat(3, 1fr);
-
-            gap: 25px;
-        }
-
-        .feature {
-            background: white;
-
-            padding: 35px;
-
-            border-radius: 18px;
-
-            border: 1px solid #eeeeee;
-
-            transition: 0.3s;
-        }
-
-        .feature:hover {
-            transform: translateY(-7px);
-
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
-        }
-
-        .feature-icon {
-            width: 50px;
-            height: 50px;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            background: #fff0df;
-
-            border-radius: 12px;
-
-            font-size: 24px;
-
-            margin-bottom: 20px;
-        }
-
-        .feature h2 {
-            font-size: 20px;
-
-            margin-bottom: 10px;
-        }
-
-        .feature p {
-            color: #777;
-
-            line-height: 1.6;
-        }
-
-
-      
-
-        .cta {
-            background: #151515;
-
-            color: white;
-
-            text-align: center;
-
-            padding: 80px 20px;
-        }
-
-        .cta h2 {
-            font-size: 40px;
-
-            margin-bottom: 15px;
-        }
-
-        .cta p {
-            color: #aaa;
-
-            margin-bottom: 30px;
-        }
-
-
-       
-
-        footer {
-            background: #151515;
-
-            border-top: 1px solid #333;
-
-            color: #777;
-
-            text-align: center;
-
-            padding: 25px;
-        }
-
-
-      
-
-        @media (max-width: 700px) {
-
-            nav {
-                padding: 0 20px;
-            }
-
-            .nav-links {
-                gap: 15px;
-            }
-
-            .features {
-                grid-template-columns: 1fr;
-            }
-
-            .hero h1 {
-                letter-spacing: -2px;
-            }
-
-        }
-
-    </style>
-
-</head>
-
-
-<body>
-
-
-    <!-- NAVBAR -->
-
-    <nav>
-
-        <div class="logo">
-            Tienda<span>Libre</span>
-        </div>
-
-        <div class="nav-links">
-
-            <a href="/">Inicio</a>
-
-            <a href="/productos/">
-                Productos
-            </a>
-
-            <a href="/acerca-de-mi/">
-                Acerca de mí
-            </a>
-
-        </div>
-
-    </nav>
-
-
-
-    <!-- HERO -->
-
-    <section class="hero">
-
-        <div class="hero-content">
-
-            <div class="tag">
-                🛍️ Tu tienda online
-            </div>
-
-            <h1>
-                Comprá fácil.<br>
-                <span>Viví mejor.</span>
-            </h1>
-
-            <p>
-                Bienvenido a Tienda Libre, un proyecto de e-commerce
-                desarrollado con Django para ofrecer una experiencia
-                simple, rápida y moderna.
-            </p>
-
-            <div class="hero-buttons">
-
-                <a
-                    href="/productos/"
-                    class="btn btn-primary"
-                >
-                    Ver productos →
-                </a>
-
-                <a
-                    href="/acerca-de-mi/"
-                    class="btn btn-secondary"
-                >
-                    Acerca de mí
-                </a>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-
-    <!-- FEATURES -->
-
-    <section class="features">
-
-
-        <div class="feature">
-
-            <div class="feature-icon">
-                🛒
-            </div>
-
-            <h2>
-                Productos
-            </h2>
-
-            <p>
-                Explorá nuestro catálogo y descubrí
-                todos los productos disponibles.
-            </p>
-
-        </div>
-
-
-
-        <div class="feature">
-
-            <div class="feature-icon">
-                ⚡
-            </div>
-
-            <h2>
-                Simple y rápido
-            </h2>
-
-            <p>
-                Una interfaz pensada para que encontrar
-                lo que buscás sea sencillo.
-            </p>
-
-        </div>
-
-
-
-        <div class="feature">
-
-            <div class="feature-icon">
-                💻
-            </div>
-
-            <h2>
-                Desarrollado con Django
-            </h2>
-
-            <p>
-                El proyecto utiliza Python, Django,
-                modelos, vistas y templates.
-            </p>
-
-        </div>
-
-
-    </section>
-
-
-
-    <!-- CTA -->
-
-    <section class="cta">
-
-        <h2>
-            ¿Qué estás buscando?
-        </h2>
-
-        <p>
-            Descubrí nuestros productos.
+        <p class="lead text-muted mb-4">
+            Un e-commerce desarrollado con Django utilizando el patrón MTV y Bootstrap.
         </p>
 
-        <a
-            href="/productos/"
-            class="btn btn-primary"
-        >
-            Explorar productos
+        <a href="/productos/" class="btn btn-warning btn-lg me-2">
+            Ver productos
         </a>
 
-    </section>
+        <a href="/acerca-de-mi/" class="btn btn-outline-dark btn-lg">
+            Acerca de mí
+        </a>
 
+    </div>
 
+</section>
 
-    <!-- FOOTER -->
+<section class="container pb-5">
 
-    <footer>
+    <div class="row g-4">
 
-        <p>
-            © 2026 Tienda Libre · Desarrollado por Juan Ignacio Farah
-        </p>
+        <div class="col-md-4">
 
-    </footer>
+            <div class="card h-100 shadow-sm">
 
+                <div class="card-body text-center">
 
-</body>
+                    <h2>🛒</h2>
 
-</html>
+                    <h5>Catálogo</h5>
+
+                    <p>Visualizá todos los productos disponibles.</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4">
+
+            <div class="card h-100 shadow-sm">
+
+                <div class="card-body text-center">
+
+                    <h2>⚡</h2>
+
+                    <h5>Rápido</h5>
+
+                    <p>Interfaz moderna gracias a Bootstrap.</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4">
+
+            <div class="card h-100 shadow-sm">
+
+                <div class="card-body text-center">
+
+                    <h2>💻</h2>
+
+                    <h5>Django</h5>
+
+                    <p>Modelos, vistas y templates trabajando juntos.</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

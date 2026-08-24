@@ -1,99 +1,45 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Acerca de mí</title>
+{% extends "base.html" %}
 
-    <style>
-        *{
-            margin:0;
-            padding:0;
-            box-sizing:border-box;
-            font-family:Arial, Helvetica, sans-serif;
-        }
+{% block titulo %}
+Acerca de mí
+{% endblock %}
 
-        body{
-            background:linear-gradient(135deg,#0f172a,#1e3a8a);
-            color:white;
-            display:flex;
-            justify-content:center;
-            align-items:center;
-            min-height:100vh;
-            padding:20px;
-        }
+{% block contenido %}
 
-        .contenido{
-            max-width:700px;
-            text-align:center;
-        }
+<section class="hero">
 
-        h1{
-            font-size:50px;
-            margin-bottom:25px;
-        }
+    <div class="container text-center">
 
-        h2{
-            color:#93c5fd;
-            margin-bottom:20px;
-        }
+        <h1 class="display-4 fw-bold mb-4">
+            👨‍💻 Acerca de mí
+        </h1>
 
-        p{
-            font-size:20px;
-            line-height:1.8;
-            color:#d1d5db;
-            margin-bottom:20px;
-        }
+        <h4 class="text-warning mb-4">
+            Juan Ignacio Farah
+        </h4>
 
-        .botones{
-            margin-top:35px;
-            display:flex;
-            justify-content:center;
-            gap:20px;
-        }
+        <p class="lead text-muted mx-auto" style="max-width:700px;">
 
-        .botones a{
-            text-decoration:none;
-            background:#2563eb;
-            color:white;
-            padding:14px 30px;
-            border-radius:10px;
-            font-weight:bold;
-            transition:.3s;
-        }
+            Soy estudiante de programación y actualmente desarrollo este proyecto
+            de e-commerce con Django como parte de la materia Desarrollo de Aplicaciones.
 
-        .botones a:hover{
-            background:#1d4ed8;
-            transform:translateY(-3px);
-        }
-    </style>
+        </p>
 
-</head>
-<body>
+        <p class="text-muted mx-auto" style="max-width:700px;">
 
-<div class="contenido">
+            Mi objetivo es aprender desarrollo web utilizando modelos, vistas,
+            templates y buenas prácticas para crear aplicaciones completas.
 
-    <h1>👨‍💻 Acerca de mí</h1>
+        </p>
 
-    <h2>Juan Ignacio Farah</h2>
+        <a href="/" class="btn btn-warning mt-3">
 
-    <p>
-        Soy estudiante de programación y actualmente estoy desarrollando
-        este proyecto de e-commerce con Django como parte de la materia
-        Desarrollo de Aplicaciones.
-    </p>
+            Volver al inicio
 
-    <p>
-        Mi objetivo es aprender desarrollo web utilizando el patrón MTV,
-        bases de datos y buenas prácticas para crear aplicaciones completas.
-    </p>
+        </a>
 
-    <div class="botones">
-        <a href="/">🏠 Inicio</a>
-        <a href="/productos/">🛒 Productos</a>
     </div>
 
-</div>
+</section>
 
-</body>
-</html>
+{% endblock %}
