@@ -1,10 +1,16 @@
 from django.shortcuts import render
 from datetime import date
 from django.views.generic import TemplateView
+from .models import Producto
+
 
 class ProductosTemplateView(TemplateView):
-    template_name = 'productos.html'
+    template_name = "catalogo.html"
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["productos"] = Producto.objects.all().order_by("-fecha_creacion")
+        return context
 
 def home(request):
 
@@ -14,50 +20,8 @@ def home(request):
         "fecha": date.today(),
         "usuario": "Juan Ignacio Farah",
 
-        "productos_destacados": [
-            {
-                "nombre": "AirPods Pro",
-                "precio": 45000,
-                "descripcion": "Auriculares inalámbricos con cancelación de ruido.",
-                "disponible": True,
-                "imagen": "/MEDIA/productos/airpods.webp"
-            },
-            {
-                "nombre": "Teclado Mecánico",
-                "precio": 78000,
-                "descripcion": "Switches rojos RGB.",
-                "disponible": True,
-                "imagen": "/MEDIA/productos/teclado.png"
-            },
-            {
-                "nombre": "Mouse Inalámbrico",
-                "precio": None,
-                "descripcion": "Diseño ergonómico para oficina.",
-                "disponible": False,
-                "imagen": "/MEDIA/productos/mousegamer.webp"
-            },
-            {
-                "nombre": "iPhone 17 Pro",
-                "precio": 1899000,
-                "descripcion": "Pantalla Super Retina XDR, chip A19 Pro y sistema de cámaras profesional.",
-                "disponible": True,
-                "imagen": "/MEDIA/productos/iphone17pro.webp",
-            },
-            {
-                "nombre": "Samsung Galaxy S25 Ultra",
-                "precio": None,
-                "descripcion": "Galaxy AI, S Pen integrado y cámara de 200 MP para fotografía de alta calidad.",
-                "disponible": False,
-                "imagen": "/MEDIA/productos/S25.webp",
-            },
-            {
-                "nombre": "Cable USB-C a Lightning",
-                "precio": 24990,
-                "descripcion": "Cable compatible con iPhone para carga rápida y transferencia de datos.",
-                "disponible": True,
-                "imagen": "/MEDIA/productos/cableiphone.webp",
-            },
-        ]
+        # Los 3 productos más recientes cargados desde el admin
+        "productos_destacados": Producto.objects.order_by("-fecha_creacion")[:3],
     }
 
     return render(request, "home.html", contexto)
@@ -65,3 +29,9 @@ def home(request):
 
 def acerca_de_mi(request):
     return render(request, "acerca_de_mi.html")
+
+
+def catalogo(request):
+    productos = Producto.objects.all().order_by("-fecha_creacion")
+    contexto = {"productos": productos}
+    return render(request, "catalogo.html", contexto)

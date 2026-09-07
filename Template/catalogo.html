@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+Catálogo
+{% endblock %}
+
+{% block contenido %}
+
+<section class="py-5 bg-light border-bottom">
+
+    <div class="container text-center">
+
+        <span class="badge bg-warning text-dark mb-3 fs-6">
+            Catálogo completo
+        </span>
+
+        <h1 class="display-4 fw-bold">
+            Nuestros Productos
+        </h1>
+
+        <p class="lead text-muted">
+            Explorá todos los productos disponibles en Tienda Libre.
+        </p>
+
+        <span class="badge bg-dark fs-6">
+            {{ productos|length }} productos disponibles
+        </span>
+
+    </div>
+
+</section>
+
+<section class="container py-5">
+
+    <div class="row g-4">
+
+        {% for producto in productos %}
+
+            <div class="col-md-6 col-lg-4">
+
+                <div class="card h-100 shadow-sm">
+
+                    <div class="card-body d-flex flex-column">
+
+                        <span class="badge bg-secondary align-self-start mb-2">
+                            {{ producto.categoria.nombre|default:"Sin categoría" }}
+                        </span>
+
+                        <h5 class="card-title">
+                            {{ producto.nombre|title }}
+                        </h5>
+
+                        <p class="card-text text-muted flex-grow-1">
+                            {{ producto.descripcion|truncatechars:80 }}
+                        </p>
+
+                        <h4 class="text-warning fw-bold mb-3">
+                            ${{ producto.precio|floatformat:2 }}
+                        </h4>
+
+                        <div class="d-flex justify-content-between align-items-center">
+
+                            {% if producto.stock > 0 %}
+                                <span class="badge bg-success">
+                                    Stock: {{ producto.stock }}
+                                </span>
+                            {% else %}
+                                <span class="badge bg-danger">
+                                    Sin stock
+                                </span>
+                            {% endif %}
+
+                            <small class="text-muted">
+                                {{ producto.marca|default:"Sin marca" }}
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        {% empty %}
+
+            <div class="col-12">
+
+                <div class="alert alert-warning text-center">
+
+                    No hay productos cargados en el catálogo.
+
+                </div>
+
+            </div>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+
+{% endblock %}

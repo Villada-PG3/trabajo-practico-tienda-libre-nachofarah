@@ -32,8 +32,8 @@ Inicio
             Fecha: {{ fecha|date:"d/m/Y" }}
         </p>
 
-        <a href="/productos/" class="btn btn-warning btn-lg me-2">
-            Ver productos
+        <a href="{% url 'productos' %}" class="btn btn-warning btn-lg me-2">
+            Ver Catálogo
         </a>
 
         <a href="/acerca-de-mi/" class="btn btn-outline-dark btn-lg">
@@ -51,57 +51,33 @@ Inicio
     <div class="row g-4">
 
         <div class="col-md-4">
-
             <div class="card h-100 shadow-sm">
-
                 <div class="card-body text-center">
-
                     <h2>🛒</h2>
-
                     <h5>Catálogo</h5>
-
                     <p>Visualizá todos los productos disponibles.</p>
-
                 </div>
-
             </div>
-
         </div>
 
         <div class="col-md-4">
-
             <div class="card h-100 shadow-sm">
-
                 <div class="card-body text-center">
-
                     <h2>⚡</h2>
-
                     <h5>Rápido</h5>
-
                     <p>Interfaz moderna gracias a Bootstrap.</p>
-
                 </div>
-
             </div>
-
         </div>
 
         <div class="col-md-4">
-
             <div class="card h-100 shadow-sm">
-
                 <div class="card-body text-center">
-
                     <h2>💻</h2>
-
                     <h5>Django</h5>
-
                     <p>Modelos, vistas y templates trabajando juntos.</p>
-
                 </div>
-
             </div>
-
         </div>
 
     </div>
@@ -114,7 +90,7 @@ Inicio
 
     <div class="d-flex justify-content-between align-items-center mb-4">
 
-        <h2>🔥 Productos destacados</h2>
+        <h2>🔥 Productos más recientes</h2>
 
         <span class="badge bg-dark fs-6">
             {{ productos_destacados|length }} productos
@@ -130,44 +106,39 @@ Inicio
 
                 <div class="card h-100 shadow-sm">
 
-                    <!-- IMAGEN -->
-
-                    <img src="{{ producto.imagen }}"
-                         class="card-img-top"
-                         alt="{{ producto.nombre }}"
-                         style="height:220px; object-fit:cover;">
-
                     <div class="card-body d-flex flex-column">
+
+                        <span class="badge bg-secondary align-self-start mb-2">
+                            {{ producto.categoria.nombre|default:"Sin categoría" }}
+                        </span>
 
                         <h5 class="card-title">
                             {{ producto.nombre|title }}
                         </h5>
 
                         <p class="card-text text-muted flex-grow-1">
-                            {{ producto.descripcion|truncatechars:45 }}
+                            {{ producto.descripcion|truncatechars:60 }}
                         </p>
 
-                        {% if producto.precio %}
-                            <h4 class="text-warning fw-bold">
-                                ${{ producto.precio|floatformat:2 }}
-                            </h4>
-                        {% else %}
-                            <h4 class="text-warning fw-bold">
-                                {{ producto.precio|default:"Consultar" }}
-                            </h4>
-                        {% endif %}
+                        <h4 class="text-warning fw-bold mb-3">
+                            ${{ producto.precio|floatformat:2 }}
+                        </h4>
 
-                        <div class="mt-2">
+                        <div class="d-flex justify-content-between align-items-center">
 
-                            {% if producto.disponible %}
+                            {% if producto.stock > 0 %}
                                 <span class="badge bg-success">
-                                    Disponible
+                                    Stock: {{ producto.stock }}
                                 </span>
                             {% else %}
                                 <span class="badge bg-danger">
                                     Sin stock
                                 </span>
                             {% endif %}
+
+                            <small class="text-muted">
+                                {{ producto.marca|default:"Sin marca" }}
+                            </small>
 
                         </div>
 
