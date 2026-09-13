@@ -47,7 +47,10 @@ Catálogo
                         </span>
 
                         <h5 class="card-title">
-                            {{ producto.nombre|title }}
+                            <a href="{% url 'detalle_producto' producto.pk %}"
+                               class="text-decoration-none text-dark">
+                                {{ producto.nombre|title }}
+                            </a>
                         </h5>
 
                         <p class="card-text text-muted flex-grow-1">
