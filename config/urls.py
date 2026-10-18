@@ -25,7 +25,7 @@ from producto import views
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("producto.urls")),
-    path('catalogo/', views.catalogo, name='catalogo'),
+    path('catalogo/', views.CatalogoView.as_view(), name='catalogo'),
 ]
 
 if settings.DEBUG:
