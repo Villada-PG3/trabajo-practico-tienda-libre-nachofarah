@@ -34,6 +34,21 @@ Catálogo
 
 <section class="container py-5">
 
+<form method="get" action="{% url 'catalogo' %}" class="mb-4">
+    <div class="input-group">
+        <input
+            type="text"
+            name="q"
+            class="form-control"
+            placeholder="Buscar productos..."
+            value="{{ request.GET.q|default:'' }}"
+        >
+        <button type="submit" class="btn btn-primary">
+            Buscar
+        </button>
+    </div>
+</form>
+
     <div class="row g-4">
 
         {% for producto in productos %}

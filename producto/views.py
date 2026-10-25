@@ -2,7 +2,8 @@
 from django.shortcuts import render, get_object_or_404
 from datetime import date
 from django.views.generic import TemplateView, ListView, DetailView
-from .models import Producto
+from .models import Producto, Categoria
+from django.db.models import Q
 
 
 class HomeView(TemplateView):
@@ -34,3 +35,22 @@ class DetalleProductoView(DetailView):
     model = Producto
     template_name = "detalle.html"
     context_object_name = "producto"
+
+
+class CategoriaView(ListView):
+    model = Producto
+    template_name = "categoria.html"
+    context_object_name = "productos"
+
+    def get_queryset(self):
+        return Producto.objects.filter(
+            categoria__slug=self.kwargs["slug"]
+        ).order_by("-fecha_creacion")
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["categoria"] = get_object_or_404(
+            Categoria,
+            slug=self.kwargs["slug"]
+        )
+        return context

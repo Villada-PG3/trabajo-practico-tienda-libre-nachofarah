@@ -11,4 +11,9 @@ urlpatterns = [
         name="detalle_producto"
     ),
     path("acerca-de-mi/", views.acerca_de_mi, name="acerca_de_mi"),
+    path(
+    "categoria/<slug:slug>/",
+    views.CategoriaView.as_view(),
+    name="categoria"
+),
 ]
