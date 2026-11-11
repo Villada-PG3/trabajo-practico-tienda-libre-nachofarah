@@ -1,7 +1,8 @@
+from django.urls import reverse_lazy
 
 from django.shortcuts import render, get_object_or_404
 from datetime import date
-from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView
+from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import Producto, Categoria
 from django.db.models import Q
 from .forms import ContactoForm, ProductoForm
@@ -86,3 +87,10 @@ class ProductoUpdateView(UpdateView):
     model = Producto
     form_class = ProductoForm
     template_name = "producto_form.html"
+
+
+class ProductoDeleteView(DeleteView):
+    """Clase 15: solicita confirmación antes de eliminar un producto."""
+    model = Producto
+    template_name = "tiendalibre/producto_confirm_delete.html"
+    success_url = reverse_lazy("catalogo")

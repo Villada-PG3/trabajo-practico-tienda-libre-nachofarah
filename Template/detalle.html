@@ -94,6 +94,9 @@
                 <a href="{% url 'producto_editar' producto.pk %}" class="btn btn-warning fw-semibold me-2">
                     Editar producto
                 </a>
+                <a href="{% url 'producto_eliminar' producto.pk %}" class="btn btn-outline-danger fw-semibold">
+                    Eliminar producto
+                </a>
             </div>
 
             <a href="{% url 'catalogo' %}" class="btn btn-outline-dark mt-3">
