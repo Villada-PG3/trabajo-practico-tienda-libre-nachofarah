@@ -11,6 +11,7 @@ urlpatterns = [
         name="detalle_producto"
     ),
     path("acerca-de-mi/", views.acerca_de_mi, name="acerca_de_mi"),
+    path("contacto/", views.contacto, name="contacto"),
     path(
     "categoria/<slug:slug>/",
     views.CategoriaView.as_view(),

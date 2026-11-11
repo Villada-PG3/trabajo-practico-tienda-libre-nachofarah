@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block titulo %}Contacto | Tienda Libre{% endblock %}
+
+{% block contenido %}
+<section class="container py-5" style="max-width: 760px;">
+    <div class="text-center mb-4">
+        <h1 class="fw-bold">Contacto</h1>
+        <p class="text-muted">Dejanos tu consulta completando el formulario.</p>
+    </div>
+
+    {% if enviado %}
+        <div class="alert alert-success" role="alert">
+            ¡Tu mensaje fue validado correctamente! Gracias por contactarnos.
+        </div>
+    {% endif %}
+
+    <div class="card shadow-sm">
+        <div class="card-body p-4">
+            <form method="post" action="{% url 'contacto' %}" novalidate>
+                {% csrf_token %}
+
+                {% if form.non_field_errors %}
+                    <div class="alert alert-danger">{{ form.non_field_errors }}</div>
+                {% endif %}
+
+                {% for campo in form %}
+                    <div class="mb-3">
+                        <label for="{{ campo.id_for_label }}" class="form-label fw-semibold">
+                            {{ campo.label }}{% if campo.field.required %} *{% endif %}
+                        </label>
+                        {{ campo }}
+                        {% if campo.help_text %}
+                            <div class="form-text">{{ campo.help_text }}</div>
+                        {% endif %}
+                        {% for error in campo.errors %}
+                            <div class="text-danger small mt-1">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+
+                <button type="submit" class="btn btn-warning w-100">Enviar consulta</button>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}

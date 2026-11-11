@@ -1,9 +1,9 @@
-
 from django.shortcuts import render, get_object_or_404
 from datetime import date
 from django.views.generic import TemplateView, ListView, DetailView
 from .models import Producto, Categoria
 from django.db.models import Q
+from .forms import ContactoForm
 
 
 class HomeView(TemplateView):
@@ -54,3 +54,19 @@ class CategoriaView(ListView):
             slug=self.kwargs["slug"]
         )
         return context
+
+
+def contacto(request):
+    """Muestra el formulario (GET) y valida su envío (POST)."""
+    enviado = False
+
+    if request.method == "POST":
+        form = ContactoForm(request.POST)
+        if form.is_valid():
+            # Por ahora solo confirmamos los datos válidos; no enviamos emails.
+            enviado = True
+            form = ContactoForm()
+    else:
+        form = ContactoForm()
+
+    return render(request, "contacto.html", {"form": form, "enviado": enviado})
