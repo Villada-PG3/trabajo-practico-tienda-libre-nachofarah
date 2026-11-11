@@ -1,7 +1,9 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth import login
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.urls import reverse_lazy
 
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from datetime import date
 from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import Producto, Categoria
@@ -76,22 +78,49 @@ def contacto(request):
 
 
 
+def registro(request):
+    """Registra al usuario y abre su sesión automáticamente."""
+    if request.user.is_authenticated:
+        return redirect("catalogo")
+
+    if request.method == "POST":
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            usuario = form.save()
+            login(request, usuario)
+            return redirect("catalogo")
+    else:
+        form = UserCreationForm()
+
+    return render(request, "registration/registro.html", {"form": form})
+
+
 class ProductoCreateView(LoginRequiredMixin, CreateView):
-    """Clase 14: crea productos utilizando el ModelForm de la clase 13."""
+    model = Producto
+    form_class = ProductoForm
+    template_name = "producto_form.html"
+
+    def form_valid(self, form):
+        form.instance.creado_por = self.request.user
+        return super().form_valid(form)
+
+
+class SoloPropietarioMixin(LoginRequiredMixin, UserPassesTestMixin):
+    """Solo el creador del producto o un superusuario puede modificarlo."""
+
+    def test_func(self):
+        producto = self.get_object()
+        return (self.request.user.is_superuser or
+                producto.creado_por_id == self.request.user.pk)
+
+
+class ProductoUpdateView(SoloPropietarioMixin, UpdateView):
     model = Producto
     form_class = ProductoForm
     template_name = "producto_form.html"
 
 
-class ProductoUpdateView(LoginRequiredMixin, UpdateView):
-    """Clase 14: edita productos existentes utilizando el mismo formulario."""
-    model = Producto
-    form_class = ProductoForm
-    template_name = "producto_form.html"
-
-
-class ProductoDeleteView(LoginRequiredMixin, DeleteView):
-    """Clase 15: solicita confirmación antes de eliminar un producto."""
+class ProductoDeleteView(SoloPropietarioMixin, DeleteView):
     model = Producto
     template_name = "tiendalibre/producto_confirm_delete.html"
     success_url = reverse_lazy("catalogo")

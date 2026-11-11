@@ -128,7 +128,7 @@ Catálogo
 
                         </div>
 
-                        {% if user.is_authenticated %}
+                        {% if user.is_authenticated and user.is_superuser or user.is_authenticated and producto.creado_por_id == user.pk %}
                         <a href="{% url 'producto_editar' producto.pk %}"
                            class="btn btn-outline-warning btn-sm mt-3 align-self-start">
                             Editar

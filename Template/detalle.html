@@ -90,7 +90,16 @@
 
             </p>
 
-            {% if user.is_authenticated %}
+            <p>
+                <strong>Publicado por:</strong>
+                {% if producto.creado_por %}
+                    {{ producto.creado_por.username }}
+                {% else %}
+                    Usuario no asignado (producto antiguo)
+                {% endif %}
+            </p>
+
+            {% if user.is_authenticated and user.is_superuser or user.is_authenticated and producto.creado_por_id == user.pk %}
             <div class="mt-4">
                 <a href="{% url 'producto_editar' producto.pk %}" class="btn btn-warning fw-semibold me-2">
                     Editar producto
