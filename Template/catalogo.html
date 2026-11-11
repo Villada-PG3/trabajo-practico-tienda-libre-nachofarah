@@ -25,8 +25,14 @@ Catálogo
         </p>
 
         <span class="badge bg-dark fs-6">
-            {{ productos|length }} productos disponibles
+            {{ page_obj.paginator.count }} productos disponibles
         </span>
+
+        <div class="mt-4">
+            <a href="{% url 'producto_nuevo' %}" class="btn btn-warning fw-semibold">
+                + Agregar producto
+            </a>
+        </div>
 
     </div>
 

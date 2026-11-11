@@ -12,6 +12,7 @@ urlpatterns = [
     ),
     path("acerca-de-mi/", views.acerca_de_mi, name="acerca_de_mi"),
     path("contacto/", views.contacto, name="contacto"),
+    path("producto/nuevo/", views.producto_nuevo, name="producto_nuevo"),
     path(
     "categoria/<slug:slug>/",
     views.CategoriaView.as_view(),
