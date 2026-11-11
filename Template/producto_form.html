@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 
-{% block titulo %}Agregar producto | Tienda Libre{% endblock %}
+{% block titulo %}{% if object %}Editar producto{% else %}Agregar producto{% endif %} | Tienda Libre{% endblock %}
 
 {% block contenido %}
 <section class="container py-5" style="max-width: 780px;">
     <div class="d-flex align-items-center justify-content-between mb-4">
-        <h1 class="fw-bold mb-0">Agregar producto</h1>
+        <h1 class="fw-bold mb-0">{% if object %}Editar producto{% else %}Agregar producto{% endif %}</h1>
         <a href="{% url 'catalogo' %}" class="btn btn-outline-secondary">Volver al catálogo</a>
     </div>
 
@@ -42,7 +42,7 @@
                     {% endif %}
                 {% endfor %}
 
-                <button type="submit" class="btn btn-warning fw-semibold">Guardar producto</button>
+                <button type="submit" class="btn btn-warning fw-semibold">{% if object %}Guardar cambios{% else %}Crear producto{% endif %}</button>
             </form>
         </div>
     </div>

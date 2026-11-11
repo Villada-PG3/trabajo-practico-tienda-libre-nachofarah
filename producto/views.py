@@ -1,7 +1,7 @@
 
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404
 from datetime import date
-from django.views.generic import TemplateView, ListView, DetailView
+from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView
 from .models import Producto, Categoria
 from django.db.models import Q
 from .forms import ContactoForm, ProductoForm
@@ -73,14 +73,16 @@ def contacto(request):
     return render(request, "contacto.html", {"form": form, "enviado": enviado})
 
 
-def producto_nuevo(request):
-    """Clase 13: crear un producto usando ModelForm y una vista basada en función."""
-    if request.method == "POST":
-        form = ProductoForm(request.POST, request.FILES)
-        if form.is_valid():
-            producto = form.save()
-            return redirect("detalle_producto", pk=producto.pk)
-    else:
-        form = ProductoForm()
 
-    return render(request, "producto_form.html", {"form": form})
+class ProductoCreateView(CreateView):
+    """Clase 14: crea productos utilizando el ModelForm de la clase 13."""
+    model = Producto
+    form_class = ProductoForm
+    template_name = "producto_form.html"
+
+
+class ProductoUpdateView(UpdateView):
+    """Clase 14: edita productos existentes utilizando el mismo formulario."""
+    model = Producto
+    form_class = ProductoForm
+    template_name = "producto_form.html"
