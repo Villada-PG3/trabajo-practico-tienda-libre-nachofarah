@@ -122,3 +122,9 @@ STATICFILES_DIRS = [
 ]
 MEDIA_URL = '/MEDIA/'
 MEDIA_ROOT = BASE_DIR / 'MEDIA'
+
+
+# Clase 16: destinos al iniciar y cerrar sesión.
+LOGIN_URL = '/accounts/login/'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'

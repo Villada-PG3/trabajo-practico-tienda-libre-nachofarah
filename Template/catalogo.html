@@ -28,11 +28,13 @@ Catálogo
             {{ page_obj.paginator.count }} productos disponibles
         </span>
 
+        {% if user.is_authenticated %}
         <div class="mt-4">
             <a href="{% url 'producto_nuevo' %}" class="btn btn-warning fw-semibold">
                 + Agregar producto
             </a>
         </div>
+        {% endif %}
 
     </div>
 
@@ -126,10 +128,12 @@ Catálogo
 
                         </div>
 
+                        {% if user.is_authenticated %}
                         <a href="{% url 'producto_editar' producto.pk %}"
                            class="btn btn-outline-warning btn-sm mt-3 align-self-start">
                             Editar
                         </a>
+                        {% endif %}
 
                     </div>
 

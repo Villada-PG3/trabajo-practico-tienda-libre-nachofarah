@@ -90,6 +90,7 @@
 
             </p>
 
+            {% if user.is_authenticated %}
             <div class="mt-4">
                 <a href="{% url 'producto_editar' producto.pk %}" class="btn btn-warning fw-semibold me-2">
                     Editar producto
@@ -98,6 +99,7 @@
                     Eliminar producto
                 </a>
             </div>
+            {% endif %}
 
             <a href="{% url 'catalogo' %}" class="btn btn-outline-dark mt-3">
 

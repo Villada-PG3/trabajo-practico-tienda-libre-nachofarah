@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 
 from django.shortcuts import render, get_object_or_404
@@ -75,21 +76,21 @@ def contacto(request):
 
 
 
-class ProductoCreateView(CreateView):
+class ProductoCreateView(LoginRequiredMixin, CreateView):
     """Clase 14: crea productos utilizando el ModelForm de la clase 13."""
     model = Producto
     form_class = ProductoForm
     template_name = "producto_form.html"
 
 
-class ProductoUpdateView(UpdateView):
+class ProductoUpdateView(LoginRequiredMixin, UpdateView):
     """Clase 14: edita productos existentes utilizando el mismo formulario."""
     model = Producto
     form_class = ProductoForm
     template_name = "producto_form.html"
 
 
-class ProductoDeleteView(DeleteView):
+class ProductoDeleteView(LoginRequiredMixin, DeleteView):
     """Clase 15: solicita confirmación antes de eliminar un producto."""
     model = Producto
     template_name = "tiendalibre/producto_confirm_delete.html"
